@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <appender name="utai"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${UTAI_HOME}/log/utai.log</file>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${UTAI_HOME}/log/utai-%d{yyyy-MM-dd}_%i.log.zip</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>200GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{"yyyy-MM-dd HH:mm:ss.SSS"} [%-5level] [%25.25thread][%30.30logger{0}] : %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{"yyyy-MM-dd HH:mm:ss.SSS"} [%highlight(%-5level)][%25.25thread][%cyan(%30.30logger{0})] : %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="utai"/>
+    </root>
+</configuration>
